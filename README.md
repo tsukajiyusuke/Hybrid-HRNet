@@ -12,7 +12,7 @@ on COCO object detection. The code is based on [mmdetection](https://github.com/
 
 ## News
 
-We've involved **SyncBatchNorm** and *Multi-scale training* in HRNetV2 now! After training with multiple scales and SyncBN, the detection models
+We've involved **SyncBatchNorm** and **Multi-scale training** in HRNetV2 now! After trained with multiple scales and SyncBN, the detection models
  obtain better performance. Code and models have been updated already! 
 
 ## Performance
