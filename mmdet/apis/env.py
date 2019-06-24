@@ -10,8 +10,8 @@ from mmcv.runner import get_dist_info
 
 
 def init_dist(launcher, backend='nccl', **kwargs):
-    if mp.get_start_method(allow_none=True) is None:
-        mp.set_start_method('spawn')
+    #if mp.get_start_method(allow_none=True) is None:
+    #    mp.set_start_method('spawn')
     if launcher == 'pytorch':
         _init_dist_pytorch(backend, **kwargs)
     elif launcher == 'mpi':

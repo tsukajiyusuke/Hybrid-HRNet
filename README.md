@@ -10,6 +10,11 @@ on COCO object detection. The code is based on [mmdetection](https://github.com/
 
 </div>
 
+## News
+
+We've involved **SyncBatchNorm** and *Multi-scale training* in HRNetV2 now! After training with multiple scales and SyncBN, the detection models
+ obtain better performance. Code and models have been updated already! 
+
 ## Performance
 ### ImageNet pretrained models
 HRNetV2 ImageNet pretrained models are now available! Codes and pretrained models are in [HRNets for Image Classification](https://github.com/HRNet/HRNet-Image-Classification)
@@ -20,14 +25,19 @@ All models are trained on COCO *train2017* set and evaluated on COCO *val2017* s
 Current results will be updated soon and more models and results are comming.
 
 ### Faster R-CNN
-|Backbone|#Params|GFLOPs|lr sched|mAP|pretrained model|detection model|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| HRNetV2-W18 |26.2M|159.1| 1x | 36.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaTqcKb9QJrIZS7Y)|
-| HRNetV2-W18 |26.2M|159.1| 2x | 38.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcHt7xyWTgVxmMLw)|
-| HRNetV2-W32 |45.0M|245.3| 1x | 39.5 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaxRamJewuDqSozQ)|
-| HRNetV2-W32 |45.0M|245.3| 2x | 40.8 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs)|
-| HRNetV2-W40 |60.5M|314.9| 1x | 40.4 | [HRNetV2-W40](https://1drv.ms/u/s!Aus8VCZ_C_33ck0gvo5jfoWBOPo) | [FasterR-CNN-HR40-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs)|
-| HRNetV2-W40 |60.5M|314.9| 2x | 41.4 | [HRNetV2-W40](https://1drv.ms/u/s!Aus8VCZ_C_33ck0gvo5jfoWBOPo) | [FasterR-CNN-HR40-2x.pth](https://1drv.ms/u/s!AiWjZ1Lamlxzb1Uy6QLZnsyfuFc)|
+|Backbone|#Params|GFLOPs|lr sched|SyncBN|MS train|mAP|pretrained model|detection model|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| HRNetV2-W18 |26.2M|159.1| 1x |N|N| 36.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaTqcKb9QJrIZS7Y)|
+| HRNetV2-W18 |26.2M|159.1| 1x |Y|N| 37.2 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-1x.pth](https://1drv.ms/u/s!Avk3cZ0cr1JedwR-inENTWU8X2E?e=llP4sR)|
+| HRNetV2-W18 |26.2M|159.1| 2x |Y|Y| **37.6** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbJjMoiThi4DojsY?e=9qS2Mh)|
+| HRNetV2-W18 |26.2M|159.1| 2x |N|N| 38.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcHt7xyWTgVxmMLw)|
+| HRNetV2-W18 |26.2M|159.1| 2x |Y|Y| **39.4** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbYWE2UwMf5fas7A?e=oi0lmh)|
+| HRNetV2-W32 |45.0M|245.3| 1x |N|N| 39.5 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaxRamJewuDqSozQ)|
+| HRNetV2-W32 |45.0M|245.3| 1x |Y|Y| **41.0** | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6Ousckab_Y65bdvmP9Qjk?e=LvWihi)|
+| HRNetV2-W32 |45.0M|245.3| 2x |N|N| 40.8 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs)|
+| HRNetV2-W32 |45.0M|245.3| 2x |Y|Y| **42.6** | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckanYRdh_HXQRGFjQ?e=hBtvfo)|
+| HRNetV2-W40 |60.5M|314.9| 1x |N|N| 40.4 | [HRNetV2-W40](https://1drv.ms/u/s!Aus8VCZ_C_33ck0gvo5jfoWBOPo) | [FasterR-CNN-HR40-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs)|
+| HRNetV2-W40 |60.5M|314.9| 2x |N|N| 41.4 | [HRNetV2-W40](https://1drv.ms/u/s!Aus8VCZ_C_33ck0gvo5jfoWBOPo) | [FasterR-CNN-HR40-2x.pth](https://1drv.ms/u/s!AiWjZ1Lamlxzb1Uy6QLZnsyfuFc)|
 
 ### Mask R-CNN
 
@@ -67,7 +77,16 @@ git clone https://github.com/cocodataset/cocoapi.git \
  && python setup.py build_ext install \
  && cd ../../
 ````
-4. Install `mmdetection-hrnet`
+
+4. Install `NVIDIA/apex` to enable **SyncBN**
+````bash
+git clone https://github.com/NVIDIA/apex
+cd apex
+python setup install --cuda_ext
+````
+
+
+5. Install `mmdetection-hrnet`
 ````bash
 git clone https://github.com/HRNet/HRNet-Object-Detection.git
 
