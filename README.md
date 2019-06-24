@@ -86,11 +86,11 @@ python setup install --cuda_ext
 ````
 
 
-5. Install `mmdetection-hrnet`
+5. Install `HRNet-Object-Detection`
 ````bash
 git clone https://github.com/HRNet/HRNet-Object-Detection.git
 
-cd mmdetection-hrnet
+cd HRNet-Object-Detection
 # compile CUDA extensions.
 chmod +x compile.sh
 ./compile.sh
@@ -105,7 +105,7 @@ For more details, see [INSTALL.md](INSTALL.md)
 
 #### HRNetV2 pretrained models
 ```bash
-cd mmdetection-hrnet
+cd HRNet-Object-Detection
 # Download pretrained models into this folder
 mkdir hrnetv2_pretrained
 ```
@@ -133,7 +133,7 @@ python tools/test.py configs/hrnet/faster_rcnn_hrnetv2p_w18_1x.py work_dirs/fast
 ## Other applications of HRNets (codes and models):
 * [Human pose estimation](https://github.com/leoxiaobin/deep-high-resolution-net.pytorch)
 * [Semantic segmentation](https://github.com/HRNet/HRNet-Semantic-Segmentation)
-* [Facial landmark detection](https://github.com/HRNet/HRNet-Facial-Landmark-Detection) (coming soon)
+* [Facial landmark detection](https://github.com/HRNet/HRNet-Facial-Landmark-Detection)
 * [Image classification](https://github.com/HRNet/HRNet-Image-Classification)
  
 ## Citation
