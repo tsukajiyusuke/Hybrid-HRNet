@@ -46,8 +46,8 @@ def collate(batch, samples_per_gpu=1, pad_size=None):
                        h = pad_size[0]
                        w = pad_size[1]
                     else:
-                       h = pad_size[0]
-                       w = pad_size[1]
+                       h = pad_size[1]
+                       w = pad_size[0]
                 padded_samples = [
                     F.pad(
                         sample.data,
