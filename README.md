@@ -12,7 +12,7 @@ on COCO object detection. The code is based on [mmdetection](https://github.com/
 
 ## News
 
-We've involved **SyncBatchNorm** and **Multi-scale training** in HRNetV2 now! After trained with multiple scales and SyncBN, the detection models
+We've involved **SyncBatchNorm** and **Multi-scale training(We provided two kinds of implementation)** in HRNetV2 now! After trained with multiple scales and SyncBN, the detection models
  obtain better performance. Code and models have been updated already! 
 
 ## Performance
@@ -29,13 +29,15 @@ Current results will be updated soon and more models and results are comming.
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | HRNetV2-W18 |26.2M|159.1| 1x |N|N| 36.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaTqcKb9QJrIZS7Y)|
 | HRNetV2-W18 |26.2M|159.1| 1x |Y|N| 37.2 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-1x.pth](https://1drv.ms/u/s!Avk3cZ0cr1JedwR-inENTWU8X2E?e=llP4sR)|
-| HRNetV2-W18 |26.2M|159.1| 2x |Y|Y| **37.6** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbJjMoiThi4DojsY?e=9qS2Mh)|
+| HRNetV2-W18 |26.2M|159.1| 1x |Y|Y(Default)| **37.6** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbJjMoiThi4DojsY?e=9qS2Mh)|
+| HRNetV2-W18 |26.2M|159.1| 1x |Y|Y(ResizeCrop)| **37.6** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) ||
 | HRNetV2-W18 |26.2M|159.1| 2x |N|N| 38.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcHt7xyWTgVxmMLw)|
-| HRNetV2-W18 |26.2M|159.1| 2x |Y|Y| **39.4** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbYWE2UwMf5fas7A?e=oi0lmh)|
+| HRNetV2-W18 |26.2M|159.1| 2x |Y|Y(Default)| **39.4** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbYWE2UwMf5fas7A?e=oi0lmh)|
+| HRNetV2-W18 |26.2M|159.1| 2x |Y|Y(ResizeCrop)| **39.7** | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) ||
 | HRNetV2-W32 |45.0M|245.3| 1x |N|N| 39.5 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaxRamJewuDqSozQ)|
-| HRNetV2-W32 |45.0M|245.3| 1x |Y|Y| **41.0** | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6Ousckab_Y65bdvmP9Qjk?e=LvWihi)|
+| HRNetV2-W32 |45.0M|245.3| 1x |Y|Y(Default)| **41.0** | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6Ousckab_Y65bdvmP9Qjk?e=LvWihi)|
 | HRNetV2-W32 |45.0M|245.3| 2x |N|N| 40.8 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs)|
-| HRNetV2-W32 |45.0M|245.3| 2x |Y|Y| **42.6** | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckanYRdh_HXQRGFjQ?e=hBtvfo)|
+| HRNetV2-W32 |45.0M|245.3| 2x |Y|Y(Default)| **42.6** | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [FasterR-CNN-HR32-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckanYRdh_HXQRGFjQ?e=hBtvfo)|
 | HRNetV2-W40 |60.5M|314.9| 1x |N|N| 40.4 | [HRNetV2-W40](https://1drv.ms/u/s!Aus8VCZ_C_33ck0gvo5jfoWBOPo) | [FasterR-CNN-HR40-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs)|
 | HRNetV2-W40 |60.5M|314.9| 2x |N|N| 41.4 | [HRNetV2-W40](https://1drv.ms/u/s!Aus8VCZ_C_33ck0gvo5jfoWBOPo) | [FasterR-CNN-HR40-2x.pth](https://1drv.ms/u/s!AiWjZ1Lamlxzb1Uy6QLZnsyfuFc)|
 
@@ -49,8 +51,6 @@ Current results will be updated soon and more models and results are comming.
 | HRNetV2-W32 | 2x | 37.6 | 42.1 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [MaskR-CNN-HR32-2x.pth](https://1drv.ms/u/s!AjfnYvdHLH5Taqt21comOmTbdBg)|
 
 
-
-
 ### Cascade R-CNN
 **Note:** we follow the original paper[2] and adopt 280k training iterations which is equal to 20 epochs in mmdetection.
 
@@ -58,6 +58,76 @@ Current results will be updated soon and more models and results are comming.
 |:--:|:--:|:--:|:--:|:--:|
 | ResNet-101  | 20e | 42.8 | [ResNet-101](https://download.pytorch.org/models/resnet101-5d3b4d8f.pth) | [CascadeR-CNN-R101-20e.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbvOFlCnGhXhKmsY)|
 | HRNetV2-W32 | 20e | 43.7 | [HRNetV2-W32](https://1drv.ms/u/s!Aus8VCZ_C_33dYBMemi9xOUFR0w) | [CascadeR-CNN-HR32-20e.pth](https://1drv.ms/u/s!AiWjZ1LamlxzasFUt8GWHW1Og3I)|
+
+
+## Techniques about multi-scale training
+
+#### Default
+
+* Procedure 
+    1. Select one scale from provided scales randomly and apply it.
+    2. Pad all images in a GPU Batch(e.g. 2 images per GPU) to the same size (see `pad_size`, `1600*1000` or `1000*1600`)
+    
+* Code
+
+You need to change lines below in config files
+
+````python
+data = dict(
+    imgs_per_gpu=4,
+    workers_per_gpu=8,
+    pad_size=(1600, 1024),
+    train=dict(
+        type=dataset_type,
+        ann_file=data_root + 'annotations/instances_train2017.json',
+        img_prefix=data_root + 'images/train2017.zip',
+        img_scale=[(1600, 1000), (1000, 600), (1333, 800)],
+        img_norm_cfg=img_norm_cfg,
+        size_divisor=32,
+        flip_ratio=0.5,
+        with_mask=False,
+        with_crowd=True,
+        with_label=True),
+````
+
+
+#### ResizeCrop
+
+Less memory and less time, this implementation is more efficient compared to the former one
+
+* Procedure
+    
+    1. Select one scale from provided scales randomly and apply it.
+    2. Crop images to a fixed size randomly if they are larger than the given size.
+    3. Pad all images to the same size (see `pad_size`).
+
+* Code 
+
+You need to change lines below in config files
+
+````python
+    imgs_per_gpu=2,
+    workers_per_gpu=4,
+    pad_size=(1216, 800),
+    train=dict(
+        type=dataset_type,
+        ann_file=data_root + 'annotations/instances_train2017.json',
+        img_prefix=data_root + 'train2017.zip',
+        img_scale=(1200, 800),
+        img_norm_cfg=img_norm_cfg,
+        size_divisor=1,
+        extra_aug=dict(
+            rand_resize_crop=dict(
+                scales=[[1400, 600], [1400, 800], [1400, 1000]],
+                size=[1200, 800]
+            )),
+        flip_ratio=0.5,
+        with_mask=False,
+        with_crowd=True,
+        with_label=True),
+````
+
+
 
 ## Quick start
 #### Environment
