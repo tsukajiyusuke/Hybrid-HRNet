@@ -27,8 +27,8 @@ Current results will be updated soon and more models and results are comming.
 **Note: Pretrained HRNets can be downloaded at [HRNets for Image Classification](https://github.com/HRNet/HRNet-Image-Classification)**
 
 ### Faster R-CNN
-|Backbone|#Params|GFLOPs|lr sched|SyncBN|MS train|mAP||model|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|Backbone|#Params|GFLOPs|lr sched|SyncBN|MS train|mAP|model|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | HRNetV2-W18 |26.2M|159.1| 1x |N|N| 36.1 | [FasterR-CNN-HR18-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaTqcKb9QJrIZS7Y)|
 | HRNetV2-W18 |26.2M|159.1| 1x |Y|N| 37.2 | [FasterR-CNN-HR18-SyncBN-1x.pth](https://1drv.ms/u/s!Avk3cZ0cr1JedwR-inENTWU8X2E?e=llP4sR)|
 | HRNetV2-W18 |26.2M|159.1| 1x |Y|Y(Default)| **37.6** | [FasterR-CNN-HR18-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbJjMoiThi4DojsY?e=9qS2Mh)|
@@ -45,8 +45,8 @@ Current results will be updated soon and more models and results are comming.
 
 ### Mask R-CNN
 
-|Backbone|lr sched|Mask mAP|Box mAP|pretrained model|detection model|
-|:--:|:--:|:--:|:--:|:--:|:--:|
+|Backbone|lr sched|Mask mAP|Box mAP|model|
+|:--:|:--:|:--:|:--:|:--:|
 | HRNetV2-W18 | 1x | 34.2 | 37.3 | [MaskR-CNN-HR18-1x.pth](https://1drv.ms/u/s!AiWjZ1Lamlxzcfh06SXd2GR1zKw)|
 | HRNetV2-W18 | 2x | 35.7 | 39.2 | [MaskR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AjfnYvdHLH5TafSZNlgq6UWnJWk)|
 | HRNetV2-W32 | 1x | 36.8 | 40.7 | [MaskR-CNN-HR32-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcugO3KlXfy_YhiE)|
@@ -56,8 +56,8 @@ Current results will be updated soon and more models and results are comming.
 ### Cascade R-CNN
 **Note:** we follow the original paper[2] and adopt 280k training iterations which is equal to 20 epochs in mmdetection.
 
-|Backbone|lr sched|mAP|pretrained model|detection model|
-|:--:|:--:|:--:|:--:|:--:|
+|Backbone|lr sched|mAP|model|
+|:--:|:--:|:--:|:--:|
 | ResNet-101  | 20e | 42.8 | [CascadeR-CNN-R101-20e.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbvOFlCnGhXhKmsY)|
 | HRNetV2-W32 | 20e | 43.7 | [CascadeR-CNN-HR32-20e.pth](https://1drv.ms/u/s!AiWjZ1LamlxzasFUt8GWHW1Og3I)|
 
