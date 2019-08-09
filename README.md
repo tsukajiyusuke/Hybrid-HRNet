@@ -33,7 +33,7 @@ Current results will be updated soon and more models and results are comming.
 | HRNetV2-W18 |26.2M|159.1| 1x |Y|N| 37.2 | [FasterR-CNN-HR18-SyncBN-1x.pth](https://1drv.ms/u/s!Avk3cZ0cr1JedwR-inENTWU8X2E?e=llP4sR)|
 | HRNetV2-W18 |26.2M|159.1| 1x |Y|Y(Default)| **37.6** | [FasterR-CNN-HR18-SyncBN-MStrain-1x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbJjMoiThi4DojsY?e=9qS2Mh)|
 | HRNetV2-W18 |26.2M|159.1| 1x |Y|Y(ResizeCrop)| **37.6** ||
-| HRNetV2-W18 |26.2M|159.1| 2x |N|N| 38.1 | [HRNetV2-W18](https://1drv.ms/u/s!Aus8VCZ_C_33cMkPimlmClRvmpw) | [FasterR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcHt7xyWTgVxmMLw)|
+| HRNetV2-W18 |26.2M|159.1| 2x |N|N| 38.1 |  [FasterR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcHt7xyWTgVxmMLw)|
 | HRNetV2-W18 |26.2M|159.1| 2x |Y|Y(Default)| **39.4** | [FasterR-CNN-HR18-SyncBN-MStrain-2x.pth](https://1drv.ms/u/s!Ao8vsd6OusckbYWE2UwMf5fas7A?e=oi0lmh)|
 | HRNetV2-W18 |26.2M|159.1| 2x |Y|Y(ResizeCrop)| **39.7** ||
 | HRNetV2-W32 |45.0M|245.3| 1x |N|N| 39.5 | [FasterR-CNN-HR32-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzaxRamJewuDqSozQ)|
