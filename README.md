@@ -47,10 +47,10 @@ Current results will be updated soon and more models and results are comming.
 
 |Backbone|lr sched|Mask mAP|Box mAP|model|
 |:--:|:--:|:--:|:--:|:--:|
-| HRNetV2-W18 | 1x | 34.2 | 37.3 | [MaskR-CNN-HR18-1x.pth](https://1drv.ms/u/s!AiWjZ1Lamlxzcfh06SXd2GR1zKw),[BaiduDrive](https://pan.baidu.com/s/1gnAQeFNaJAmMXEZW9iChqQ)(vvc1)|
-| HRNetV2-W18 | 2x | 35.7 | 39.2 | [MaskR-CNN-HR18-2x.pth](https://1drv.ms/u/s!AjfnYvdHLH5TafSZNlgq6UWnJWk),[BaiduDrive](https://pan.baidu.com/s/1uj9GmGEaYq2DT6EBX1BQXQ)(x2m7)|
-| HRNetV2-W32 | 1x | 36.8 | 40.7 | [MaskR-CNN-HR32-1x.pth](https://1drv.ms/u/s!AiWjZ1LamlxzcugO3KlXfy_YhiE),[BaiduDrive](https://pan.baidu.com/s/1txiS1pEpryu_Y7KOmvpI9A)(j2ir)|
-| HRNetV2-W32 | 2x | 37.6 | 42.1 | [MaskR-CNN-HR32-2x.pth](https://1drv.ms/u/s!AjfnYvdHLH5Taqt21comOmTbdBg),[BaiduDrive](https://pan.baidu.com/s/1P8zG7AKKo2JDZMZui65LFg)(tzkz)|
+| HRNetV2-W18 | 1x | 34.2 | 37.3 | [OneDrive](https://1drv.ms/u/s!AiWjZ1Lamlxzcfh06SXd2GR1zKw),[BaiduDrive](https://pan.baidu.com/s/1gnAQeFNaJAmMXEZW9iChqQ)(vvc1)|
+| HRNetV2-W18 | 2x | 35.7 | 39.2 | [OneDrive](https://1drv.ms/u/s!AjfnYvdHLH5TafSZNlgq6UWnJWk),[BaiduDrive](https://pan.baidu.com/s/1uj9GmGEaYq2DT6EBX1BQXQ)(x2m7)|
+| HRNetV2-W32 | 1x | 36.8 | 40.7 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzcugO3KlXfy_YhiE),[BaiduDrive](https://pan.baidu.com/s/1txiS1pEpryu_Y7KOmvpI9A)(j2ir)|
+| HRNetV2-W32 | 2x | 37.6 | 42.1 | [OneDrive](https://1drv.ms/u/s!AjfnYvdHLH5Taqt21comOmTbdBg),[BaiduDrive](https://pan.baidu.com/s/1P8zG7AKKo2JDZMZui65LFg)(tzkz)|
 
 
 ### Cascade R-CNN
@@ -58,8 +58,8 @@ Current results will be updated soon and more models and results are comming.
 
 |Backbone|lr sched|mAP|model|
 |:--:|:--:|:--:|:--:|
-| ResNet-101  | 20e | 42.8 | [CascadeR-CNN-R101-20e.pth](https://1drv.ms/u/s!AiWjZ1LamlxzbvOFlCnGhXhKmsY),[BaiduDrive](https://pan.baidu.com/s/1umrD3RhWa0dKG-6jUBnRDg)(bzlg)|
-| HRNetV2-W32 | 20e | 43.7 | [CascadeR-CNN-HR32-20e.pth](https://1drv.ms/u/s!AiWjZ1LamlxzasFUt8GWHW1Og3I),[BaiduDrive](https://pan.baidu.com/s/1st1qi2MyeO7qLguj2fKLfQ)(ydd7)|
+| ResNet-101  | 20e | 42.8 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzbvOFlCnGhXhKmsY),[BaiduDrive](https://pan.baidu.com/s/1umrD3RhWa0dKG-6jUBnRDg)(bzlg)|
+| HRNetV2-W32 | 20e | 43.7 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzasFUt8GWHW1Og3I),[BaiduDrive](https://pan.baidu.com/s/1st1qi2MyeO7qLguj2fKLfQ)(ydd7)|
 
 
 ## Techniques about multi-scale training
