@@ -3,6 +3,7 @@
 ## News
 - HRNet-Object-Detection is combined into the [mmdetection](https://github.com/open-mmlab/mmdetection) codebase. More results are available at [model zoo](https://github.com/open-mmlab/mmdetection/blob/master/MODEL_ZOO.md) and the HRNet folder https://github.com/open-mmlab/mmdetection/tree/master/configs/hrnet. 
 
+- HRNet with an anchor-free detection algorithm [FCOS](https://github.com/tianzhi0549/FCOS) is available at https://github.com/HRNet/HRNet-FCOS
 - Multi-scale training available. We've involved **SyncBatchNorm** and **Multi-scale training(We provided two kinds of implementation)** in HRNetV2 now! After trained with multiple scales and SyncBN, the detection models
  obtain better performance. Code and models have been updated already! 
  
