@@ -1,7 +1,7 @@
 # High-resolution networks (HRNets) for object detection
 
 ## News
-- HRNet-Object-Detection is combined into the [mmdetection](https://github.com/open-mmlab/mmdetection) codebase. More results are available at [model zoo](https://github.com/open-mmlab/mmdetection/blob/master/docs/MODEL_ZOO.md) and the HRNet folder https://github.com/open-mmlab/mmdetection/tree/master/configs/hrnet. 
+- HRNet-Object-Detection is combined into the [mmdetection](https://github.com/open-mmlab/mmdetection) codebase. More results are available at [model zoo](https://github.com/open-mmlab/mmdetection/blob/master/docs/MODEL_ZOO.md) and [HRNet in mmdetection](https://github.com/open-mmlab/mmdetection/tree/master/configs/hrnet). 
 
 - HRNet with an anchor-free detection algorithm [FCOS](https://github.com/tianzhi0549/FCOS) is available at https://github.com/HRNet/HRNet-FCOS
 - Multi-scale training available. We've involved **SyncBatchNorm** and **Multi-scale training(We provided two kinds of implementation)** in HRNetV2 now! After trained with multiple scales and SyncBN, the detection models
@@ -33,6 +33,8 @@ Current results will be updated soon and more models and results are comming.
 
 **Note: Pretrained HRNets can be downloaded at [HRNets for Image Classification](https://github.com/HRNet/HRNet-Image-Classification)**
 
+**Note**: Models with `*` are implemented in Official [mmdetection](https://github.com/open-mmlab/mmdetection).
+
 ### Faster R-CNN
 |Backbone|#Params|GFLOPs|lr sched|SyncBN|MS train|mAP|model|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -49,6 +51,8 @@ Current results will be updated soon and more models and results are comming.
 | HRNetV2-W32 |45.0M|245.3| 2x |Y|Y(Default)| **42.6** | [OneDrive](https://1drv.ms/u/s!Ao8vsd6OusckanYRdh_HXQRGFjQ?e=hBtvfo),[BaiduDrive](https://pan.baidu.com/s/1MFCzseuy8RXloVyThotLSw)(k03x)|
 | HRNetV2-W40 |60.5M|314.9| 1x |N|N| 40.4 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzbE6rbdU9whYJkqs),[BaiduDrive](https://pan.baidu.com/s/1_9D_3Z75doqo4ksy5iIDqA)(0qda)|
 | HRNetV2-W40 |60.5M|314.9| 2x |N|N| 41.4 | [OneDrive](https://1drv.ms/u/s!AiWjZ1Lamlxzb1Uy6QLZnsyfuFc),[BaiduDrive](https://pan.baidu.com/s/1sJJdhR2aC9eSsEzqKl1jCA)(xny6)|
+| HRNetV2-W48* |79.4M|399.1| 1x |N|N| 40.9 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/faster_rcnn_hrnetv2p_w48_1x_20190820-5c6d0903.pth)|
+| HRNetV2-W48* |79.4M|399.1| 1x |N|N| 41.5 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/faster_rcnn_hrnetv2p_w48_2x_20190820-79fb8bfc.pth) |
 
 ### Mask R-CNN
 
@@ -58,15 +62,47 @@ Current results will be updated soon and more models and results are comming.
 | HRNetV2-W18 | 2x | 35.7 | 39.2 | [OneDrive](https://1drv.ms/u/s!AjfnYvdHLH5TafSZNlgq6UWnJWk),[BaiduDrive](https://pan.baidu.com/s/1uj9GmGEaYq2DT6EBX1BQXQ)(x2m7)|
 | HRNetV2-W32 | 1x | 36.8 | 40.7 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzcugO3KlXfy_YhiE),[BaiduDrive](https://pan.baidu.com/s/1txiS1pEpryu_Y7KOmvpI9A)(j2ir)|
 | HRNetV2-W32 | 2x | 37.6 | 42.1 | [OneDrive](https://1drv.ms/u/s!AjfnYvdHLH5Taqt21comOmTbdBg),[BaiduDrive](https://pan.baidu.com/s/1P8zG7AKKo2JDZMZui65LFg)(tzkz)|
-
+| HRNetV2-W48* | 1x | 42.4 | 38.1 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/mask_rcnn_hrnetv2p_w48_1x_20190820-0923d1ad.pth) |
+| HRNetV2-W48* | 2x | 42.9 | 38.3 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/mask_rcnn_hrnetv2p_w48_2x_20190820-70df51b2.pth)|
 
 ### Cascade R-CNN
 **Note:** we follow the original paper[2] and adopt 280k training iterations which is equal to 20 epochs in mmdetection.
 
 |Backbone|lr sched|mAP|model|
 |:--:|:--:|:--:|:--:|
-| ResNet-101  | 20e | 42.8 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzbvOFlCnGhXhKmsY),[BaiduDrive](https://pan.baidu.com/s/1umrD3RhWa0dKG-6jUBnRDg)(bzlg)|
-| HRNetV2-W32 | 20e | 43.7 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzasFUt8GWHW1Og3I),[BaiduDrive](https://pan.baidu.com/s/1st1qi2MyeO7qLguj2fKLfQ)(ydd7)|
+| HRNetV2-W18* | 20e | 41.2 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/cascade_rcnn_hrnetv2p_w18_20e_20190810-132012d0.pth) |
+| HRNetV2-W32  | 20e | 43.7 | [OneDrive](https://1drv.ms/u/s!AiWjZ1LamlxzasFUt8GWHW1Og3I),[BaiduDrive](https://pan.baidu.com/s/1st1qi2MyeO7qLguj2fKLfQ)(ydd7)|
+| HRNetV2-W48* | 20e | 44.6 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/cascade_rcnn_hrnetv2p_w48_20e_20190810-f40ed8e1.pth) |
+
+### Cascade Mask R-CNN
+
+|Backbone|lr sched|Mask mAP|Box mAP|model|
+|:--:|:--:|:--:|:--:|:--:|
+| HRNetV2-W18* | 20e | 36.4 | 41.9 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/cascade_mask_rcnn_hrnetv2p_w18_20e_20190810-054fb7bf.pth) |
+| HRNetV2-W32* | 20e | 38.5 | 44.5 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/cascade_mask_rcnn_hrnetv2p_w32_20e_20190810-76f61cd0.pth) |
+| HRNetV2-W48* | 20e | 39.5 | 46.0 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/cascade_mask_rcnn_hrnetv2p_w48_20e_20190810-d04a1415.pth) |
+
+### Hybrid Task Cascade
+
+|Backbone|lr sched|Mask mAP|Box mAP|model|
+|:--:|:--:|:--:|:--:|:--:|
+| HRNetV2-W18* | 20e | 37.9 | 43.1 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/htc_hrnetv2p_w18_20e_20190810-d70072af.pth) |
+| HRNetV2-W32* | 20e | 39.6 | 45.3 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/htc_hrnetv2p_w32_20e_20190810-82f9ef5a.pth) |
+| HRNetV2-W48* | 20e | 40.7 | 46.8 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/htc_hrnetv2p_w48_20e_20190810-f6d2c3fd.pth) |
+| HRNetV2-W48* | 28e | 41.0 | 47.0 | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/htc_hrnetv2p_w48_28e_20190810-a4274b38.pth) |
+
+
+### FCOS
+
+| Backbone  |  GN     | MS train | Lr schd | Box mAP | model |
+|:---------:|:-------:|:--------:|:-------:|:------:|:--------:|
+|HRNetV2p-W18*| Y       | N       | 1x       | 35.2   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w18_1x_20190810-87a17998.pth) |
+|HRNetV2p-W18*| Y       | N       | 2x       | 38.2   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w18_2x_20190810-dfd60a7b.pth) |
+|HRNetV2p-W32*| Y       | N       | 1x       | 37.7   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w32_1x_20190810-62014622.pth) |
+|HRNetV2p-W32*| Y       | N       | 2x       | 40.3   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w32_2x_20190810-8e987ec1.pth) |
+|HRNetV2p-W18*| Y       | Y       | 2x       | 38.1   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w18_mstrain_2x_20190810-eb846b2c.pth) |
+|HRNetV2p-W32*| Y       | Y       | 2x       | 41.4   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w32_mstrain_2x_20190810-96127bf8.pth) |
+|HRNetV2p-W48*| Y       | Y       | 2x       | 42.9   | [model](https://open-mmlab.s3.ap-northeast-2.amazonaws.com/mmdetection/models/hrnet/fcos_hrnetv2p_w48_mstrain_2x_20190810-f7dc8801.pth) |
 
 
 ## Techniques about multi-scale training
