@@ -1,6 +1,7 @@
 # High-resolution networks (HRNets) for object detection
 
 ## News
+- [2020/03/13] Our paper is accepted by TPAMI: [Deep High-Resolution Representation Learning for Visual Recognition](https://arxiv.org/pdf/1908.07919.pdf).
 - Results on more detection frameworks available. For example, the score reaches 47 under the Hybrid Task Cascade framework.
 - HRNet-Object-Detection is combined into the [mmdetection](https://github.com/open-mmlab/mmdetection) codebase. More results are available at [model zoo](https://github.com/open-mmlab/mmdetection/blob/master/docs/MODEL_ZOO.md) and [HRNet in mmdetection](https://github.com/open-mmlab/mmdetection/tree/master/configs/hrnet). 
 
