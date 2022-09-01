@@ -2,7 +2,13 @@ import mmcv
 import numpy as np
 import torch
 
-__all__ = ['ImageTransform', 'BboxTransform', 'MaskTransform', 'Numpy2Tensor']
+__all__ = [
+    "ImageTransform",
+    "BboxTransform",
+    "MaskTransform",
+    "SegTransform",
+    "Numpy2Tensor",
+]
 
 
 class ImageTransform(object):
@@ -15,11 +21,7 @@ class ImageTransform(object):
     5. transpose to (c, h, w)
     """
 
-    def __init__(self,
-                 mean=(0, 0, 0),
-                 std=(1, 1, 1),
-                 to_rgb=True,
-                 size_divisor=None):
+    def __init__(self, mean=(0, 0, 0), std=(1, 1, 1), to_rgb=True, size_divisor=None):
         self.mean = np.array(mean, dtype=np.float32)
         self.std = np.array(std, dtype=np.float32)
         self.to_rgb = to_rgb
@@ -29,10 +31,10 @@ class ImageTransform(object):
         if keep_ratio:
             img, scale_factor = mmcv.imrescale(img, scale, return_scale=True)
         else:
-            img, w_scale, h_scale = mmcv.imresize(
-                img, scale, return_scale=True)
-            scale_factor = np.array([w_scale, h_scale, w_scale, h_scale],
-                                    dtype=np.float32)
+            img, w_scale, h_scale = mmcv.imresize(img, scale, return_scale=True)
+            scale_factor = np.array(
+                [w_scale, h_scale, w_scale, h_scale], dtype=np.float32
+            )
         img_shape = img.shape
         img = mmcv.imnormalize(img, self.mean, self.std, self.to_rgb)
         if flip:
@@ -97,20 +99,35 @@ class MaskTransform(object):
 
     def __call__(self, masks, pad_shape, scale_factor, flip=False):
         masks = [
-            mmcv.imrescale(mask, scale_factor, interpolation='nearest')
+            mmcv.imrescale(mask, scale_factor, interpolation="nearest")
             for mask in masks
         ]
         if flip:
             masks = [mask[:, ::-1] for mask in masks]
-        padded_masks = [
-            mmcv.impad(mask, pad_shape[:2], pad_val=0) for mask in masks
-        ]
+        padded_masks = [mmcv.impad(mask, pad_shape[:2], pad_val=0) for mask in masks]
         padded_masks = np.stack(padded_masks, axis=0)
         return padded_masks
 
 
-class Numpy2Tensor(object):
+class SegTransform(object):
+    """Preprocess masks.
 
+    1. resize masks to expected size and stack to a single array
+    2. flip the masks (if needed)
+    3. pad the masks (if needed)
+    """
+
+    def __call__(self, mask, pad_shape, scale_factor, flip=False):
+
+        mask = mmcv.imrescale(mask, scale_factor, interpolation="nearest")
+
+        if flip:
+            mask = mask[:, ::-1]
+        padded_mask = mmcv.impad(mask, pad_shape[:2], pad_val=0)
+        return padded_mask
+
+
+class Numpy2Tensor(object):
     def __init__(self):
         pass
 

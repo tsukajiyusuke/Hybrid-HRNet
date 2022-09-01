@@ -9,10 +9,26 @@ from .repeat_dataset import RepeatDataset
 from .extra_aug import ExtraAugmentation
 from .zip_dataset import ZipDataset
 from .coco_zip import CocoZipDataset
+from .hybrid import Hybrid
+from .hybrid_zip import Hybrid_zip
 
 __all__ = [
-    'CustomDataset', 'XMLDataset', 'CocoDataset', 'VOCDataset', 'GroupSampler',
-    'DistributedGroupSampler', 'build_dataloader', 'to_tensor', 'random_scale',
-    'show_ann', 'get_dataset', 'ConcatDataset', 'RepeatDataset', 'ZipDataset',
-    'ExtraAugmentation', 'CocoZipDataset'
+    "CustomDataset",
+    "XMLDataset",
+    "CocoDataset",
+    "VOCDataset",
+    "GroupSampler",
+    "DistributedGroupSampler",
+    "build_dataloader",
+    "to_tensor",
+    "random_scale",
+    "show_ann",
+    "get_dataset",
+    "ConcatDataset",
+    "RepeatDataset",
+    "ZipDataset",
+    "ExtraAugmentation",
+    "CocoZipDataset",
+    "Hybrid",
+    "Hybrid_zip",
 ]
