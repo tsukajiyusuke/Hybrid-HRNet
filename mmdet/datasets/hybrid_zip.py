@@ -22,24 +22,19 @@ from PIL import Image
 from collections import OrderedDict
 
 
-def pre_load_images(zipfilename: str, img_prefix: str) -> list[str]:
-    images = list()
+def pre_load_files(zipfilename: str, file_prefix: str) -> list[str]:
+    files = list()
     with zipfile.ZipFile(zipfilename, "r") as f:
-        all_image_names = f.namelist()
-        for name in all_image_names:
-            if img_prefix in name:
-                images.append(osp.basename(name))
-    return images
+        all_file_names = f.namelist()
+        for name in all_file_names:
+            if file_prefix in name:
+                files.append(osp.basename(name))
+    return files
 
 
-def exist_file(zipfilename: str, path: str) -> bool:
-    with zipfile.ZipFile(zipfilename, "r") as f:
-        try:
-            f.read(path)
-        except:
-            return False
-        else:
-            return True
+def exist_file(path: str, ann: list) -> bool:
+    return  any( for i in ann):
+        
 
 
 def load_img(zipfilename: str, path: str, seg=False):
@@ -129,23 +124,21 @@ class Hybrid_zip(Dataset):
         print("building database...")
         gt_db = []
 
-        images = pre_load_images(self.img_zip, self.img_prefix)
+        images = pre_load_files(self.img_zip, self.img_prefix)
+        for zipfilename, prefix in self.det_prefix.items():
+            det = pre_load_files(zipfilename, prefix)
+        for zipfilename, prefix in self.seg_prefix.items():
+            seg = pre_load_files(zipfilename, prefix)
+
         # テストが完了したら戻す
         for name in images[:600]:
-
-            for zipfilename, prefix in self.seg_prefix.items():
-                path = osp.join(prefix, name.replace("jpg", "png"))
-                exist = exist_file(zipfilename, path)
-                if not exist:
-                    break
+            name.replace("jpg", "json")
+            exist = any(name==i for i in det)
             if not exist:
                 continue
 
-            for zipfilename, prefix in self.det_prefix.items():
-                path = osp.join(prefix, name.replace("jpg", "json"))
-                exist = exist_file(zipfilename, path)
-                if not exist:
-                    break
+            name.replace("json", "png")
+            exist = any(name==i for i in seg)
             if not exist:
                 continue
             gt_db.append(name)
