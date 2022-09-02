@@ -32,11 +32,6 @@ def pre_load_files(zipfilename: str, file_prefix: str) -> list[str]:
     return files
 
 
-def exist_file(path: str, ann: list) -> bool:
-    return  any( for i in ann):
-        
-
-
 def load_img(zipfilename: str, path: str, seg=False):
 
     with zipfile.ZipFile(zipfilename, "r") as f:
@@ -133,12 +128,12 @@ class Hybrid_zip(Dataset):
         # テストが完了したら戻す
         for name in images[:600]:
             name.replace("jpg", "json")
-            exist = any(name==i for i in det)
+            exist = any(name == i for i in det)
             if not exist:
                 continue
 
             name.replace("json", "png")
-            exist = any(name==i for i in seg)
+            exist = any(name == i for i in seg)
             if not exist:
                 continue
             gt_db.append(name)
