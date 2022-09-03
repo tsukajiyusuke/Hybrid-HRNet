@@ -22,10 +22,11 @@ def single_test(model, data_loader, show=False):
         results.append(result)
 
         if show:
-            model.module.show_result(data, result, dataset.img_norm_cfg,
-                                     dataset=dataset.CLASSES)
+            model.module.show_result(
+                data, result, dataset.img_norm_cfg, dataset=dataset.CLASSES
+            )
 
-        batch_size = data['img'][0].size(0)
+        batch_size = data["img"][0].size(0)
         for _ in range(batch_size):
             prog_bar.update()
     return results
@@ -37,24 +38,24 @@ def _data_func(data, device_id):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='MMDet test detector')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
+    parser = argparse.ArgumentParser(description="MMDet test detector")
+    parser.add_argument("config", help="test config file path")
+    parser.add_argument("checkpoint", help="checkpoint file")
     parser.add_argument(
-        '--gpus', default=1, type=int, help='GPU number used for testing')
+        "--gpus", default=1, type=int, help="GPU number used for testing"
+    )
     parser.add_argument(
-        '--proc_per_gpu',
-        default=1,
-        type=int,
-        help='Number of processes per GPU')
-    parser.add_argument('--out', help='output result file')
+        "--proc_per_gpu", default=1, type=int, help="Number of processes per GPU"
+    )
+    parser.add_argument("--out", help="output result file")
     parser.add_argument(
-        '--eval',
+        "--eval",
         type=str,
-        nargs='+',
-        choices=['proposal', 'proposal_fast', 'bbox', 'segm', 'keypoints'],
-        help='eval types')
-    parser.add_argument('--show', action='store_true', help='show results')
+        nargs="+",
+        choices=["proposal", "proposal_fast", "bbox", "segm", "keypoints"],
+        help="eval types",
+    )
+    parser.add_argument("--show", action="store_true", help="show results")
     args = parser.parse_args()
     return args
 
@@ -62,20 +63,19 @@ def parse_args():
 def main():
     args = parse_args()
 
-    if args.out is not None and not args.out.endswith(('.pkl', '.pickle')):
-        raise ValueError('The output file must be a pkl file.')
+    if args.out is not None and not args.out.endswith((".pkl", ".pickle")):
+        raise ValueError("The output file must be a pkl file.")
 
     cfg = mmcv.Config.fromfile(args.config)
     # set cudnn_benchmark
-    if cfg.get('cudnn_benchmark', False):
+    if cfg.get("cudnn_benchmark", False):
         torch.backends.cudnn.benchmark = True
     cfg.model.pretrained = None
     cfg.data.test.test_mode = True
 
     dataset = obj_from_dict(cfg.data.test, datasets, dict(test_mode=True))
     if args.gpus == 1:
-        model = build_detector(
-            cfg.model, train_cfg=None, test_cfg=cfg.test_cfg)
+        model = build_detector(cfg.model, train_cfg=None, test_cfg=cfg.test_cfg)
         load_checkpoint(model, args.checkpoint)
         model = MMDataParallel(model, device_ids=[0])
 
@@ -85,12 +85,13 @@ def main():
             workers_per_gpu=cfg.data.workers_per_gpu,
             num_gpus=1,
             dist=False,
-            shuffle=False)
+            shuffle=False,
+        )
         outputs = single_test(model, data_loader, args.show)
     else:
         model_args = cfg.model.copy()
         model_args.update(train_cfg=None, test_cfg=cfg.test_cfg)
-        model_type = getattr(detectors, model_args.pop('type'))
+        model_type = getattr(detectors, model_args.pop("type"))
         outputs = parallel_test(
             model_type,
             model_args,
@@ -98,30 +99,31 @@ def main():
             dataset,
             _data_func,
             range(args.gpus),
-            workers_per_gpu=args.proc_per_gpu)
+            workers_per_gpu=args.proc_per_gpu,
+        )
 
     if args.out:
-        print('writing results to {}'.format(args.out))
+        print("writing results to {}".format(args.out))
         mmcv.dump(outputs, args.out)
         eval_types = args.eval
         if eval_types:
-            print('Starting evaluate {}'.format(' and '.join(eval_types)))
-            if eval_types == ['proposal_fast']:
+            print("Starting evaluate {}".format(" and ".join(eval_types)))
+            if eval_types == ["proposal_fast"]:
                 result_file = args.out
                 coco_eval(result_file, eval_types, dataset.coco)
             else:
                 if not isinstance(outputs[0], dict):
-                    result_file = args.out + '.json'
+                    result_file = args.out + ".json"
                     results2json(dataset, outputs, result_file)
                     coco_eval(result_file, eval_types, dataset.coco)
                 else:
                     for name in outputs[0]:
-                        print('\nEvaluating {}'.format(name))
+                        print("\nEvaluating {}".format(name))
                         outputs_ = [out[name] for out in outputs]
-                        result_file = args.out + '.{}.json'.format(name)
+                        result_file = args.out + ".{}.json".format(name)
                         results2json(dataset, outputs_, result_file)
                         coco_eval(result_file, eval_types, dataset.coco)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
