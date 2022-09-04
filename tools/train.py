@@ -1,5 +1,5 @@
 from __future__ import division
-
+import warnings
 import os
 import argparse
 from mmcv import Config
@@ -43,7 +43,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-
+    warnings.filterwarnings("ignore", category=UserWarning)
     cfg = Config.fromfile(args.config)
     # set cudnn_benchmark
     if cfg.get("cudnn_benchmark", False):

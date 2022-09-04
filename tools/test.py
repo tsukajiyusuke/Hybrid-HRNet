@@ -1,5 +1,5 @@
 import argparse
-
+import warnings
 import torch
 import mmcv
 from mmcv.runner import load_checkpoint, parallel_test, obj_from_dict
@@ -62,7 +62,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-
+    warnings.filterwarnings("ignore", category=UserWarning)
     if args.out is not None and not args.out.endswith((".pkl", ".pickle")):
         raise ValueError("The output file must be a pkl file.")
 
