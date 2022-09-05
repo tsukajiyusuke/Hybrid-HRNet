@@ -261,6 +261,8 @@ class Hybrid(Dataset):
         gt_labels = []
         for j in json_list:
             for idx in range(len(j)):
+                if not any(i == j[idx]["category"] for i in self.CLASSES):
+                    continue
                 if j[idx].get("box2d") == None:
                     continue
                 pre_box = [
