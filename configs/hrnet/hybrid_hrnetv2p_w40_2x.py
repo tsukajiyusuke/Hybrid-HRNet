@@ -156,7 +156,7 @@ data = dict(
     workers_per_gpu=4,
     train=dict(
         type=dataset_type,
-        img_dir=data_root + "bdd100k/images/10k",
+        img_dir=data_root + "bdd100k/images/100k",
         img_prefix="train/",
         seg_prefix={
             data_root + "bdd_seg_gt": "train/",
