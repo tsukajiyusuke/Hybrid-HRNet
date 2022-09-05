@@ -120,17 +120,24 @@ class Hybrid_zip(Dataset):
         gt_db = []
 
         images = pre_load_files(self.img_zip, self.img_prefix)
-        for zipfilename, prefix in self.det_prefix.items():
-            det = pre_load_files(zipfilename, prefix)
-        for zipfilename, prefix in self.seg_prefix.items():
-            seg = pre_load_files(zipfilename, prefix)
+        dets = []
+        for idx, (zipfilename, prefix) in enumerate(self.det_prefix.items()):
+            dets[idx] = pre_load_files(zipfilename, prefix)
+        segs = []
+        for idx, (zipfilename, prefix) in enumerate(self.seg_prefix.items()):
+            segs[idx] = pre_load_files(zipfilename, prefix)
         # テストが完了したら戻す
         for name in images[:600]:
-            exist = any(name.replace(".jpg", ".json") == i for i in det)
+            for det in dets:
+                exist = name.replace(".jpg", ".json") in set(det)
+                if not exist:
+                    break
             if not exist:
                 continue
-
-            exist = any(name.replace(".jpg", ".png") == i for i in seg)
+            for seg in segs:
+                exist = name.replace(".jpg", ".png") in set(seg)
+                if not exist:
+                    break
             if not exist:
                 continue
             gt_db.append(name)

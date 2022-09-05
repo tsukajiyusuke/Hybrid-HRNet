@@ -145,7 +145,7 @@ test_cfg = dict(
 # dataset settings
 # if you use zip format to store all images of coco, please use CocoZipDataset
 dataset_type = "Hybrid"
-data_root = "/content/drive/MyDrive/3年/画像・映像コンテンツ演習3/"
+data_root = "/content/datasets/"
 img_norm_cfg = dict(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], to_rgb=False)
 # else
 # dataset_type = 'CocoDataset'
@@ -156,15 +156,13 @@ data = dict(
     workers_per_gpu=4,
     train=dict(
         type=dataset_type,
-        img_dir=data_root + "bdd100k_images_100k",
-        img_prefix="bdd100k/images/100k/train/",
+        img_dir=data_root + "bdd100k/images/10k",
+        img_prefix="train/",
         seg_prefix={
-            data_root + "da_seg_annotations": "bdd_seg_gt/train/",
-            data_root + "ll_seg_annotations": "bdd_lane_gt/train/",
+            data_root + "bdd_seg_gt": "train/",
+            data_root + "bdd_lane_gt": "train/",
         },
-        det_prefix={
-            data_root + "det_annotations": "data2/zwt/bdd/bdd100k/labels/100k/train/"
-        },
+        det_prefix={data_root + "data2/zwt/bdd/bdd100k/labels/100k": "train/"},
         with_label=True,
         with_seg=True,
         original_scale=(720, 1280, 3),
@@ -175,15 +173,13 @@ data = dict(
     ),
     val=dict(
         type=dataset_type,
-        img_dir=data_root + "bdd100k_images_100k",
-        img_prefix="bdd100k/images/100k/train/",
+        img_dir=data_root + "bdd100k/images/10k",
+        img_prefix="val/",
         seg_prefix={
-            data_root + "da_seg_annotations": "bdd_seg_gt/train/",
-            data_root + "ll_seg_annotations": "bdd_lane_gt/train/",
+            data_root + "bdd_seg_gt": "val/",
+            data_root + "bdd_lane_gt": "val/",
         },
-        det_prefix={
-            data_root + "det_annotations": "data2/zwt/bdd/bdd100k/labels/100k/train/"
-        },
+        det_prefix={data_root + "data2/zwt/bdd/bdd100k/labels/100k": "val/"},
         with_label=True,
         with_seg=True,
         original_scale=(720, 1280, 3),
@@ -194,15 +190,13 @@ data = dict(
     ),
     test=dict(
         type=dataset_type,
-        img_dir=data_root + "bdd100k_images_100k",
-        img_prefix="bdd100k/images/100k/train/",
+        img_dir=data_root + "bdd100k/images/10k",
+        img_prefix="train/",
         seg_prefix={
-            data_root + "da_seg_annotations": "bdd_seg_gt/train/",
-            data_root + "ll_seg_annotations": "bdd_lane_gt/train/",
+            data_root + "bdd_seg_gt": "train/",
+            data_root + "bdd_lane_gt": "train/",
         },
-        det_prefix={
-            data_root + "det_annotations": "data2/zwt/bdd/bdd100k/labels/100k/train/"
-        },
+        det_prefix={data_root + "data2/zwt/bdd/bdd100k/labels/100k": "train/"},
         with_label=True,
         with_seg=True,
         original_scale=(720, 1280, 3),

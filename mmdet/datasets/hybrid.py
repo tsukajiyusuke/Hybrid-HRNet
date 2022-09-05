@@ -24,14 +24,10 @@ import os
 from collections import OrderedDict
 
 
-def pre_load_images(img_dir: str, img_prefix: str):
-    with os.scandir(path=osp.join(img_dir, img_prefix)) as it:
-        images = [os.path.abspath(entry.path) for entry in it]
-    return images
-
-
-def exist_file(dirname: str, path: str) -> bool:
-    return osp.exists(osp.join(dirname, path))
+def pre_load_files(file_dir: str, file_prefix: str):
+    with os.scandir(path=osp.join(file_dir, file_prefix)) as it:
+        files = [osp.basename(entry.path) for entry in it]
+    return files
 
 
 def load_img(dirname: str, path: str, seg=False):
@@ -116,21 +112,24 @@ class Hybrid(Dataset):
         print("building database...")
         gt_db = []
 
-        images = pre_load_images(self.img_dir, self.img_prefix)
+        images = pre_load_files(self.img_dir, self.img_prefix)
+        dets = []
+        for idx, (zipfilename, prefix) in enumerate(self.det_prefix.items()):
+            dets[idx] = pre_load_files(zipfilename, prefix)
+        segs = []
+        for idx, (zipfilename, prefix) in enumerate(self.seg_prefix.items()):
+            segs[idx] = pre_load_files(zipfilename, prefix)
         # テストが完了したら戻す
-        for path in images[:20]:
-            name = osp.basename(path)
-            for dirname, prefix in self.seg_prefix.items():
-                path = osp.join(prefix, name.replace("jpg", "png"))
-                exist = exist_file(dirname, path)
+        images = images[:]
+        for name in images:
+            for det in dets:
+                exist = name.replace(".jpg", ".json") in set(det)
                 if not exist:
                     break
             if not exist:
                 continue
-
-            for dirname, prefix in self.det_prefix.items():
-                path = osp.join(prefix, name.replace("jpg", "json"))
-                exist = exist_file(dirname, path)
+            for seg in segs:
+                exist = name.replace(".jpg", ".png") in set(seg)
                 if not exist:
                     break
             if not exist:
