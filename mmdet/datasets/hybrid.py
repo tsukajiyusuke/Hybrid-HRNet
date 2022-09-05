@@ -115,10 +115,10 @@ class Hybrid(Dataset):
         images = pre_load_files(self.img_dir, self.img_prefix)
         dets = []
         for idx, (zipfilename, prefix) in enumerate(self.det_prefix.items()):
-            dets[idx] = pre_load_files(zipfilename, prefix)
+            dets.append(pre_load_files(zipfilename, prefix))
         segs = []
         for idx, (zipfilename, prefix) in enumerate(self.seg_prefix.items()):
-            segs[idx] = pre_load_files(zipfilename, prefix)
+            segs.append(pre_load_files(zipfilename, prefix))
         # テストが完了したら戻す
         images = images[:]
         for name in images:
