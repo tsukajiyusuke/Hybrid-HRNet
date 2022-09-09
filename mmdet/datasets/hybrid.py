@@ -253,6 +253,10 @@ class Hybrid(Dataset):
         gt_labels = []
         for j in json_list:
             for idx in range(len(j)):
+                if j[idx]["category"] == "bicycle":
+                    j[idx]["category"] = self.CLASSES[0]
+                elif j[idx]["category"] == "truck":
+                    j[idx]["category"] = self.CLASSES[1]
                 if not any(i == j[idx]["category"] for i in self.CLASSES):
                     continue
                 if j[idx].get("box2d") == None:
@@ -265,10 +269,6 @@ class Hybrid(Dataset):
                 ]
                 box = self.convert(self.shape, pre_box)
                 gt_bboxes.append(box)
-                if j[idx]["category"] == "bicycle":
-                    j[idx]["category"] = self.CLASSES[0]
-                elif j[idx]["category"] == "truck":
-                    j[idx]["category"] = self.CLASSES[1]
 
                 gt_labels.append(int(self.CLASSES.index(j[idx]["category"])))
         gt_bboxes = np.array(gt_bboxes, dtype=np.float32)
