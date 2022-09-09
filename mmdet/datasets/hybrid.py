@@ -50,8 +50,6 @@ class Hybrid(Dataset):
     CLASSES = (
         "rider",
         "car",
-        "truck",
-        "bicycle",
     )
     CLASSES_SEG = ("road", "lane")
 
@@ -267,9 +265,9 @@ class Hybrid(Dataset):
                 ]
                 box = self.convert(self.shape, pre_box)
                 gt_bboxes.append(box)
-                if self.CLASSES.index(j[idx]["category"]) == 3:
+                if j[idx]["category"] == "bicycle":
                     j[idx]["category"] = self.CLASSES[0]
-                elif self.CLASSES.index(j[idx]["category"]) == 2:
+                elif j[idx]["category"] == "truck":
                     j[idx]["category"] = self.CLASSES[1]
 
                 gt_labels.append(int(self.CLASSES.index(j[idx]["category"])))
