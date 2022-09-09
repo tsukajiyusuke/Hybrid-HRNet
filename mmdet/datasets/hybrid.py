@@ -48,16 +48,10 @@ def load_json(dirname: str, path: str):
 class Hybrid(Dataset):
 
     CLASSES = (
-        "person",
         "rider",
         "car",
         "truck",
-        "bus",
-        "train",
-        "motorcycle",
         "bicycle",
-        "traffic light",
-        "traffic sign",
     )
     CLASSES_SEG = ("road", "lane")
 
@@ -273,6 +267,11 @@ class Hybrid(Dataset):
                 ]
                 box = self.convert(self.shape, pre_box)
                 gt_bboxes.append(box)
+                if self.CLASSES.index(j[idx]["category"]) == 3:
+                    j[idx]["category"] = self.CLASSES[0]
+                elif self.CLASSES.index(j[idx]["category"]) == 2:
+                    j[idx]["category"] = self.CLASSES[1]
+
                 gt_labels.append(int(self.CLASSES.index(j[idx]["category"])))
         gt_bboxes = np.array(gt_bboxes, dtype=np.float32)
         gt_labels = np.array(gt_labels, dtype=np.int64)
