@@ -148,7 +148,7 @@ class Hybrid(Dataset):
                             box = self.convert(self.shape, pre_box)
                             gt_bboxes.append(box)
                             gt_labels.append(
-                                int(self.CLASSES.index(j[idx]["category"]))
+                                int(self.CLASSES.index(j[idx]["category"])) + 1
                             )
                     gt_bboxes = np.array(gt_bboxes, dtype=np.float32)
                     gt_labels = np.array(gt_labels, dtype=np.int64)
