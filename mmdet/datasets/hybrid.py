@@ -112,21 +112,59 @@ class Hybrid(Dataset):
         for zipfilename, prefix in self.seg_prefix.items():
             segs.append(pre_load_files(zipfilename, prefix))
         # テストが完了したら戻す
-        images = images[:]
+        images = images[:600]
         for name in images:
             for det in dets:
                 exist = name.replace(".jpg", ".json") in set(det)
                 if not exist:
                     break
+                else:
+                    json_list = []
+                    for dirfilename, prefix in self.det_prefix.items():
+                        path = osp.join(prefix, name.replace("jpg", "json"))
+                        json_list.append(
+                            load_json(dirfilename, path)["frames"][0]["objects"]
+                        )
+                    # ToDo02:enable to use bboxes_ignore
+                    gt_bboxes_ignore = np.zeros((0, 4), dtype=np.float32)
+                    gt_bboxes = []
+                    gt_labels = []
+                    for j in json_list:
+                        for idx in range(len(j)):
+                            if j[idx]["category"] == "bicycle":
+                                j[idx]["category"] = self.CLASSES[0]
+                            elif j[idx]["category"] == "truck":
+                                j[idx]["category"] = self.CLASSES[1]
+                            if not any(i == j[idx]["category"] for i in self.CLASSES):
+                                continue
+                            if j[idx].get("box2d") == None:
+                                continue
+                            pre_box = [
+                                j[idx].get("box2d")["x1"],
+                                j[idx].get("box2d")["x2"],
+                                j[idx].get("box2d")["y1"],
+                                j[idx].get("box2d")["y2"],
+                            ]
+                            box = self.convert(self.shape, pre_box)
+                            gt_bboxes.append(box)
+                            gt_labels.append(
+                                int(self.CLASSES.index(j[idx]["category"]))
+                            )
+                    gt_bboxes = np.array(gt_bboxes, dtype=np.float32)
+                    gt_labels = np.array(gt_labels, dtype=np.int64)
+                    if len(gt_bboxes) == 0:
+                        exist = False
+                        break
             if not exist:
                 continue
+
             for seg in segs:
                 exist = name.replace(".jpg", ".png") in set(seg)
                 if not exist:
                     break
             if not exist:
                 continue
-            gt_db.append(name)
+            gt_db.append([name, gt_bboxes, gt_labels, gt_bboxes_ignore])
         print("database build finish")
         return gt_db
 
@@ -143,9 +181,6 @@ class Hybrid(Dataset):
         gt_labels = ann["labels"]
         seg = ann["seg"]
         gt_bboxes_ignore = ann["bboxes_ignore"]
-        # skip the image if there is no valid gt bbox
-        if len(gt_bboxes) == 0:
-            return None
 
         # apply transforms
         flip = True if np.random.rand() < self.flip_ratio else False
@@ -184,7 +219,7 @@ class Hybrid(Dataset):
 
     def prepare_test_img(self, idx):
         """Prepare an image for testing (multi-scale and flipping)"""
-        name = self.db[idx]
+        name, gt_bboxes, gt_labels, gt_bboxes_ignore = self.db[idx]
         # load image
         path = osp.join(self.img_prefix, name)
         img = load_img(self.img_dir, path)
@@ -227,7 +262,12 @@ class Hybrid(Dataset):
             self.flag[i] = 1
 
     def get_ann_info(self, idx):
-        name = self.db[idx]
+        (
+            name,
+            gt_bboxes,
+            gt_labels,
+            gt_bboxes_ignore,
+        ) = self.db[idx]
         # load image
         path = osp.join(self.img_prefix, name)
         img = load_img(self.img_dir, path)
@@ -236,43 +276,12 @@ class Hybrid(Dataset):
         for dirfilename, prefix in self.seg_prefix.items():
             path = osp.join(prefix, name.replace("jpg", "png"))
             seg_list.append(load_img(dirfilename, path, seg=True))
-        json_list = []
-        for dirfilename, prefix in self.det_prefix.items():
-            path = osp.join(prefix, name.replace("jpg", "json"))
-            json_list.append(load_json(dirfilename, path)["frames"][0]["objects"])
         seg = np.where((seg_list[1] == 0), seg_list[0], seg_list[1])
         # いらない
         seg = np.where(seg == 127, 1, seg)
         seg = np.where(seg == 191, 1, seg)
         seg = np.where(seg == 255, 0, seg)
         # いつか撤去
-
-        # ToDo02:enable to use bboxes_ignore
-        gt_bboxes_ignore = np.zeros((0, 4), dtype=np.float32)
-        gt_bboxes = []
-        gt_labels = []
-        for j in json_list:
-            for idx in range(len(j)):
-                if j[idx]["category"] == "bicycle":
-                    j[idx]["category"] = self.CLASSES[0]
-                elif j[idx]["category"] == "truck":
-                    j[idx]["category"] = self.CLASSES[1]
-                if not any(i == j[idx]["category"] for i in self.CLASSES):
-                    continue
-                if j[idx].get("box2d") == None:
-                    continue
-                pre_box = [
-                    j[idx].get("box2d")["x1"],
-                    j[idx].get("box2d")["x2"],
-                    j[idx].get("box2d")["y1"],
-                    j[idx].get("box2d")["y2"],
-                ]
-                box = self.convert(self.shape, pre_box)
-                gt_bboxes.append(box)
-
-                gt_labels.append(int(self.CLASSES.index(j[idx]["category"])))
-        gt_bboxes = np.array(gt_bboxes, dtype=np.float32)
-        gt_labels = np.array(gt_labels, dtype=np.int64)
         ann = dict(
             bboxes=gt_bboxes,
             labels=gt_labels,
