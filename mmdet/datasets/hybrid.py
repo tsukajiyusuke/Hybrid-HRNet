@@ -146,7 +146,13 @@ class Hybrid(Dataset):
                                 j[idx].get("box2d")["y2"],
                             ]
                             box = self.convert(self.shape, pre_box)
-                            gt_bboxes.append(box)
+                            bbox = [
+                                (box[0] - box[2] / 2) * self.shape[1],
+                                (box[1] - box[3] / 2) * self.shape[0],
+                                (box[0] + box[2] / 2) * self.shape[1],
+                                (box[1] + box[3] / 2) * self.shape[0],
+                            ]
+                            gt_bboxes.append(bbox)
                             gt_labels.append(
                                 int(self.CLASSES.index(j[idx]["category"])) + 1
                             )
