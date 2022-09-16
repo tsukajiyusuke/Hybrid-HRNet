@@ -52,20 +52,20 @@ class NewStageDetector(BaseDetector, RPNTestMixin, BBoxTestMixin, MaskTestMixin)
         self.init_weights(pretrained=pretrained)
         if freezeBackBone:
 
-            backbone.requires_grad = False
-            neck.requires_grad = False
+            self.backbone.requires_grad_(False)
+            self.neck.requires_grad_(False)
             print("[Info] freezed backbone")
 
         if freezeDet:
 
-            bbox_head.requires_grad = False
-            rpn_head.requires_grad = False
-            bbox_roi_extractor.requires_grad = False
+            self.bbox_head.requires_grad_(False)
+            self.rpn_head.requires_grad_(False)
+            self.bbox_roi_extractor.requires_grad_(False)
             print("[Info] freezed detection head")
 
         if freezeSeg:
 
-            seg_head.requires_grad = False
+            self.seg_head.requires_grad_(False)
             print("[Info] freezed segmentation head")
 
     @property

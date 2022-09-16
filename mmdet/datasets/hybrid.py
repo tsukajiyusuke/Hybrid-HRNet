@@ -48,7 +48,7 @@ def load_json(dirname: str, path: str):
 class Hybrid(Dataset):
 
     CLASSES = (
-        "rider",
+        "person",
         "car",
     )
     CLASSES_SEG = ("road", "lane")
@@ -131,9 +131,7 @@ class Hybrid(Dataset):
                     gt_labels = []
                     for j in json_list:
                         for idx in range(len(j)):
-                            if j[idx]["category"] == "bicycle":
-                                j[idx]["category"] = self.CLASSES[0]
-                            elif j[idx]["category"] == "truck":
+                            if j[idx]["category"] == "truck":
                                 j[idx]["category"] = self.CLASSES[1]
                             if not any(i == j[idx]["category"] for i in self.CLASSES):
                                 continue
