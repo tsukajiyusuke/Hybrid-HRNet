@@ -112,7 +112,10 @@ class Hybrid(Dataset):
         for zipfilename, prefix in self.seg_prefix.items():
             segs.append(pre_load_files(zipfilename, prefix))
         # テストが完了したら戻す
-        images = images[:600]
+        if self.test_mode:
+            images = images[:200]
+        else:
+            images = images[:600]
         for name in images:
             for det in dets:
                 exist = name.replace(".jpg", ".json") in set(det)
