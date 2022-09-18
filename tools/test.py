@@ -2,7 +2,7 @@ import argparse
 import warnings
 import torch
 import mmcv
-from mmcv.runner import load_checkpoint, parallel_test, obj_from_dict
+from mmcv.runner import load_checkpoint, obj_from_dict
 from mmcv.parallel import scatter, collate, MMDataParallel
 
 from mmdet import datasets
@@ -88,7 +88,7 @@ def main():
             shuffle=False,
         )
         outputs = single_test(model, data_loader, args.show)
-    else:
+    """ else:
         model_args = cfg.model.copy()
         model_args.update(train_cfg=None, test_cfg=cfg.test_cfg)
         model_type = getattr(detectors, model_args.pop("type"))
@@ -100,7 +100,7 @@ def main():
             _data_func,
             range(args.gpus),
             workers_per_gpu=args.proc_per_gpu,
-        )
+        ) """
 
     if args.out:
         print("writing results to {}".format(args.out))

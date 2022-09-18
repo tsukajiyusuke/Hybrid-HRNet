@@ -69,6 +69,7 @@ class Hybrid(Dataset):
         resize_keep_ratio=True,
         test_mode=False,
     ):
+        self.img_norm_cfg = img_norm_cfg
         self.ignore_index = 0
         self.shape = original_scale
         self.img_transform = ImageTransform(size_divisor=size_divisor, **img_norm_cfg)
